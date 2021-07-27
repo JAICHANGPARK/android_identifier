@@ -14,13 +14,13 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
-Future<bool> checkPhonePermission()async {
+  String? _platformVersion = 'Unknown';
+Future<bool?> checkPhonePermission()async {
   var result = await AndroidMultipleIdentifier.checkPermission();
   print(result);
   return result;
 }
-Future<bool> requestPhonePermission() async {
+Future<bool?> requestPhonePermission() async {
   var result = await AndroidMultipleIdentifier.requestPermission();
   print(result);
   return result;
@@ -30,7 +30,7 @@ Future<bool> requestPhonePermission() async {
     super.initState();
     initPlatformState().then((value){
       checkPhonePermission().then((value) {
-        if(!value){
+        if(!value!){
           requestPhonePermission();
         }
       });
@@ -41,7 +41,7 @@ Future<bool> requestPhonePermission() async {
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
-    String platformVersion;
+    String? platformVersion;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       platformVersion = await AndroidMultipleIdentifier.platformVersion;
